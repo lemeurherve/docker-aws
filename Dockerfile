@@ -1,8 +1,8 @@
-ARG AWS_CLI_VERSION=2.1.38
+ARG AWS_CLI_VERSION=2.1.39
 FROM amazon/aws-cli:${AWS_CLI_VERSION}
 
 ## Repeating the ARG to add it into the scope of this image
-ARG AWS_CLI_VERSION=2.1.38
+ARG AWS_CLI_VERSION=2.1.39
 
 ## bash need to be installed for this instruction to work as expected
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
