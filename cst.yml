@@ -9,7 +9,7 @@ metadataTest:
     - key: io.jenkins-infra.tools
       value: "aws-cli,jq"
     - key: io.jenkins-infra.tools.aws-cli.version
-      value: "2.1.38"
+      value: "2.1.39"
     - key: io.jenkins-infra.tools.jq.version
       value: "1.5"
   entrypoint: []
