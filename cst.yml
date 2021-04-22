@@ -24,10 +24,6 @@ fileExistenceTests:
     path: '/usr/bin/curl'
     shouldExist: true
     isExecutableBy: 'any'
-  - name: 'Git'
-    path: '/usr/bin/git'
-    shouldExist: true
-    isExecutableBy: 'any'
   - name: 'Make'
     path: '/usr/bin/make'
     shouldExist: true
@@ -38,10 +34,6 @@ fileExistenceTests:
     isExecutableBy: 'any'
   - name: 'Which'
     path: '/usr/bin/which'
-    shouldExist: true
-    isExecutableBy: 'any'
-  - name: 'AWS CLI'
-    path: '/usr/local/bin/aws'
     shouldExist: true
     isExecutableBy: 'any'
   - name: 'JQ'

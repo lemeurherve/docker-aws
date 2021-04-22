@@ -10,8 +10,9 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ### Build requirements
 RUN yum install -y \
     curl-* \
-    git-* \
     make-* \
+    # Required to have adduser
+    shadow-utils-* \
     unzip-* \
     which-* \
   && yum clean all
@@ -26,7 +27,7 @@ RUN curl --silent --show-error --location --output /usr/local/bin/jq \
 ENV USER=infra
 ENV HOME=/home/"${USER}"
 
-RUN adduser -D -u 1000 "${USER}" \
+RUN adduser --uid=1000 "${USER}" \
   && chown -R "${USER}" /home/"${USER}" \
   && chmod -R 750 /home/"${USER}"
 
@@ -34,8 +35,9 @@ USER "${USER}"
 
 LABEL io.jenkins-infra.tools="aws-cli,jq"
 LABEL io.jenkins-infra.tools.aws-cli.version="${AWS_CLI_VERSION}"
-LABEL io.jenkins-infra.tools.aws-cli.version="${JQ_VERSION}"
+LABEL io.jenkins-infra.tools.jq.version="${JQ_VERSION}"
 
 WORKDIR /app
 
+ENTRYPOINT []
 CMD ["/bin/bash"]
