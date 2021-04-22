@@ -18,7 +18,7 @@ RUN yum install -y \
   && yum clean all
 
 ### Install JQ to allow JSON command line management
-ARG JQ_VERSION=1.5
+ARG JQ_VERSION=1.6
 RUN curl --silent --show-error --location --output /usr/local/bin/jq \
     "https://github.com/stedolan/jq/releases/download/jq-${JQ_VERSION}/jq-linux64" \
   && chmod a+x /usr/local/bin/jq \
