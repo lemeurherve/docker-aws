@@ -1,0 +1,67 @@
+---
+title: "Bump jq version"
+sources:
+  getJqVersion:
+    kind: githubRelease
+    name: Get the latest Jq version
+    spec:
+      owner: "stedolan"
+      repository: "jq"
+      token: "{{ requiredEnv .github.token }}"
+      username: "{{ .github.username }}"
+      versionFilter:
+        kind: latest
+    transformers:
+      - trimPrefix: "jq-"
+conditions:
+  testDockerfileArgJqVersion:
+    name: "Does the Dockerfile have an ARG instruction which key is JQ_VERSION?"
+    kind: dockerfile
+    spec:
+      file: Dockerfile
+      instruction:
+        keyword: "ARG"
+        matcher: "JQ_VERSION"
+  testCstJqVersion:
+    name: "Does the test harness checks for a label io.jenkins-infra.tools.jq.version?"
+    kind: yaml
+    spec:
+      file: "cst.yml"
+      key: "metadataTest.labels[2].key"
+      value: io.jenkins-infra.tools.jq.version
+targets:
+  updateCstJqVersion:
+    name: "Update the label io.jenkins-infra.tools.jq.version in the test harness"
+    sourceID: getJqVersion
+    kind: yaml
+    spec:
+      file: "cst.yml"
+      key: "metadataTest.labels[2].value"
+    scm:
+      github:
+        user: "{{ .github.user }}"
+        email: "{{ .github.email }}"
+        owner: "{{ .github.owner }}"
+        repository: "{{ .github.repository }}"
+        token: "{{ requiredEnv .github.token }}"
+        username: "{{ .github.username }}"
+        branch: "{{ .github.branch }}"
+  updateDockerfileArgJqVersion:
+    name: "Update the value of ARG JQ_VERSION in the Dockerfile"
+    sourceID: getJqVersion
+    kind: dockerfile
+    spec:
+      file: Dockerfile
+      instruction:
+        keyword: "ARG"
+        matcher: "JQ_VERSION"
+    scm:
+      github:
+        user: "{{ .github.user }}"
+        email: "{{ .github.email }}"
+        owner: "{{ .github.owner }}"
+        repository: "{{ .github.repository }}"
+        token: "{{ requiredEnv .github.token }}"
+        username: "{{ .github.username }}"
+        branch: "{{ .github.branch }}"
+...
