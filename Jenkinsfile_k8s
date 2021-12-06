@@ -1,1 +1,1 @@
-parallelDockerUpdatecli([imageName: 'aws')
+parallelDockerUpdatecli([imageName: 'aws'])
