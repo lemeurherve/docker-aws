@@ -1,5 +1,8 @@
 = Docker Image for AWS CLI Operations
 
+[IMPORTANT]
+Project superseeded by https://github.com/jenkins-infra/docker-hashicorp-tools
+
 This repository hosts the resources to build a Docker Image used for any operation involvin the AWS CLI on the Jenkins Infrastructure.
 
 == Contribute
